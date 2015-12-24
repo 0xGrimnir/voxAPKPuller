@@ -35,10 +35,14 @@ echo Path to Package:
 FOR /F "tokens=* USEBACKQ" %%F IN (`adb shell pm path %packageName%`) DO (
 SET packagePath=%%F
 )
-ECHO %packagePath%
+echo %packagePath%
 REM Slices off "package:" so the adb pull command works properly, when pulling the package path.
 set packagePath=%packagePath:~8,300%
 echo.
 adb pull %packagePath% c:\
+echo Your .apk file is now located at c:\
+echo.
+echo Deleting the packageList.txt file.
+del c:\packageList.txt
 pause
 REM Enjoy.
